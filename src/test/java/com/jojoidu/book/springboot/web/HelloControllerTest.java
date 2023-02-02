@@ -40,18 +40,18 @@ public class HelloControllerTest {
         String hello = "hello";
 
         mvc.perform(get("/hello"))
+                /** mvc.perform(get("/hello"))
+                 * MockMvc를 통해 /hello 주소로 HTTP GET 요청을 합니다.
+                 * 체이닝이 지원되어 아래과 같이 여러 검증 기능을 이어서 선언할 수 있습니다.
+                 */
                 .andExpect(status().isOk())
+                /** .andExpect(status().isOk())
+                 * mvc.perform의 결과를 검증합니다.
+                 * HTTP Header의 Status를 검증합나다.
+                 * 우리가 흔히 알고 있는 200, 404, 500 등의 상태를 검증합니다.
+                 * 여기서는 OK 즉, 200인지 아닌지를 검증합니다.
+                 */
                 .andExpect(content().string(hello));
-        /** mvc.perform(get("/hello"))
-         * MockMvc를 통해 /hello 주소로 HTTP GET 요청을 합니다.
-         * 체이닝이 지원되어 아래과 같이 여러 검증 기능을 이어서 선언할 수 있습니다.
-         */
-        /** .andExpect(status().isOk())
-         * mvc.perform의 결과를 검증합니다.
-         * HTTP Header의 Status를 검증합나다.
-         * 우리가 흔히 알고 있는 200, 404, 500 등의 상태를 검증합니다.
-         * 여기서는 OK 즉, 200인지 아닌지를 검증합니다.
-         */
         /** .andExpect(content().string(hello));
          * mvc.perform의 결과를 검증합니다.
          * 응답 본문의 내용을 검증합니다.
