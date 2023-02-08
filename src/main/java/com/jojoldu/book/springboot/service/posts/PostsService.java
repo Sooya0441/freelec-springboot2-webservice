@@ -22,7 +22,7 @@ public class PostsService {
     @Transactional
     public Long update(Long id, PostsUpdateRequestDto requestDto){
         Posts posts = postsRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+                .orElseThrow(() -> new IllegalArgumentException("Not Found this Article. id=" + id));
         posts.update(requestDto.getTitle(), requestDto.getContent());
 
         return id;
@@ -30,7 +30,7 @@ public class PostsService {
 
     public PostsResponseDto findById(Long id){
         Posts entity = postsRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+                .orElseThrow(() -> new IllegalArgumentException("Not Found this Article. id=" + id));
 
         return new PostsResponseDto(entity);
     }
