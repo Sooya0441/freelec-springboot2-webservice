@@ -32,7 +32,11 @@
                 {{! \{\{id\}\} 등의 \{\{변수명\}\}
                 * List 에서 뽑아낸 객체의 핃드를 사용합니다.
                 }}
-                <td>{{title}}</td>
+                <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+                {{! <a href="/posts/update/\{\{id\}\}"></a>
+                * 타이틀(title)에 a tag 를 추가합니다.
+                * 타이틀을 클릭하면 해당 게시글의 수정 화면으로 이동합니다.
+                }}
                 <td>{{author}}</td>
                 <td>{{modifiedDate}}</td>
             </tr>
