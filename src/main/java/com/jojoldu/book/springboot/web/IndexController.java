@@ -1,5 +1,6 @@
 package com.jojoldu.book.springboot.web;
 
+import com.jojoldu.book.springboot.config.auth.LoginUser;
 import com.jojoldu.book.springboot.config.auth.dto.SessionUser;
 import com.jojoldu.book.springboot.service.posts.PostsService;
 import com.jojoldu.book.springboot.web.dto.PostsResponseDto;
@@ -18,14 +19,20 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model, @LoginUser SessionUser user){
+        /** @LoginUser SessionUser user -> 어노테이션 추가 영역
+         * 기존에 (SessionUser) httpSession.getAttribute("user") 로 가져오던 세션 정보 값이 개선되었습니다.
+         * 이제는 어느 컨트롤러든지 @LoginUser만 사용하면 세션 정보를 가져올 수 있게 되었습니다.
+         */
         /** Model
          * 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장할 수 있습니다.
          * 여기서는 postsService.findAllDesc() 로 가져온 결과를 posts 로 index.mustache 에 전달합니다.
          */
         model.addAttribute("posts", postsService.findAllDesc());
 
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        /** @LoginUser 어노테이션 사용으로 삭제된 구문
+         * SessionUser user = (SessionUser) httpSession.getAttribute("user");
+         */
         /** (SessionUser) httpSession.getAttribute("user")
          * 앞서 작성된 CustomOAuth2UserService 에서 로그인 성공 시 세션에 SessionUser 를 저장하도록 구성했습니다.
          * 즉, 로그인 성공 시 httpSession.getAttribute("user")에서 값을 가져올 수 있습니다.
