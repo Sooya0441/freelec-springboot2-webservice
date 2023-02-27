@@ -58,12 +58,17 @@ echo "> JAR Name: $JAR_NAME"
 # 일반적으로 자바를 실행할 때는 java -jar라는 명령어를 사용하지만, 이렇게 하면 사용자가 터미널 접속을 끊을 때 애플리케이션도 같이 종료됩니다.
 # 애플리케이션 실행자가 터미널을 종료해도 애플리케이션은 계속 구동될 수 있도록 nohup 명령어를 사용합니다.
 nohup java -jar \
-    -Dspring.config.location=classpath:/application.properties,/home/ubuntu/app/step1/application-oauth.properties \
+    -Dspring.config.location=classpath:/application.properties,/home/ubuntu/app/step1/application-oauth.properties,/home/ubuntu/app/step1/application-real-db.properties \
+	-Dspring.profiles.active=real \
     $REPOSITORY/$JAR_NAME 2>&1 &
 # -Dspring.config.location
 # 스프링 설정 파일 위치를 지정합니다.
 # 기본 옵션들을 담고 있는 application.properties와 OAuth 설정들을 담고 있는 application-oauth.properties의 위치를 지정합니다.
 # classpath가 붙으면 jar안에 있는 resources 디렉토리를 기준으로 경로가 생성됩니다.
 # application-oauth.properties는 절대 경로를 사용합니다. 외부에 파일이 있기 때문입니다.
+
+# -Dspring.profiles.active=real
+# application-real-db.properties 를 활성화시킵니다.
+# application-real-db.properties 의 spring.profiles.include=oauth,real-db 옵션 때문에 real-db 역시 함께 활성화 대상에 포함됩니다.
 sleep 15
 tail -n 10 ./nohup.out

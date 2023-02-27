@@ -3,3 +3,5 @@
 build.gradle.bak
 client_secret_139270353893-ck0h2h2ca0e43octtejfabrd19h74p8a.apps.googleusercontent.com.json
 application-oauth.properties
+application-real-db.properties
+deploy.sh
